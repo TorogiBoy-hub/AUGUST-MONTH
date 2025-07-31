@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Leng 💖</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #ffdee9, #b5fffc);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #333;
+      overflow: hidden;
+    }
+    .container {
+      padding: 40px 20px;
+      animation: fadeIn 2s ease-in-out;
+      display: none;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      animation: pulse 4s infinite;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff69b4;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      animation: bounceIn 1s ease;
+    }
+    button:hover {
+      background-color: #ff1493;
+      transform: scale(1.05);
+    }
+    #message {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #cc0066;
+      min-height: 30px;
+    }
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes bounceIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .popup {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #fff0f5;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 1000;
+    }
+    .confetti, .sparkleCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .floating-message {
+      position: absolute;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #ff1493;
+      animation: floatUp 6s ease-in forwards;
+    }
+    @keyframes floatUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-100px); }
+    }
+    .footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    #startBtn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ff1493;
+      color: #fff;
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      animation: bounceIn 1.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="startBtn">💖 Tap to Start the Magic</button>
+
+  <canvas class="confetti"></canvas>
+  <canvas class="sparkleCanvas"></canvas>
+
+  <div class="container" id="mainContent">
+    <h1>Hi Leng 💕</h1>
+    <img src="A117.jpg" alt="Your Beautiful Smile">
+    <p>This page is for you — to make you smile, feel loved, and remind you how special you are to me. 💗</p>
+
+    <button onclick="handleClick('You make my world brighter.')">🌞 Sweet Note</button>
+    <button onclick="handleClick('Your smile is my favorite view.')">😊 Smile Boost</button>
+    <button onclick="handleClick('No one compares to you, my love.')">💘 Love Note</button>
+    <button onclick="handleClick('Keep shining, baby. I’m so proud of you.')">🌟 Affirmation</button>
+    <button onclick="handleClick('I love you, Leng. Forever and always.')">❤️ Final Note</button>
+    <button onclick="handleClick('You’re the reason I believe in magic.')">✨ Surprise #1</button>
+    <button onclick="handleClick('My heart whispers your name every moment.')">💓 Surprise #2</button>
+    <button onclick="handleClick('Even the stars envy your sparkle.')">🌌 Surprise #3</button>
+
+    <div id="message"></div>
+    <div class="footer">Made with all my love by your Partner 💌 | Happy Monthsary on August 1, 2025</div>
+  </div>
+
+  <div class="popup" id="popupBox"></div>
+  <audio id="bgMusic" src="Lulay.mp3" preload="auto" loop></audio>
+
+  <script>
+    const audio = document.getElementById("bgMusic");
+    document.getElementById("startBtn").addEventListener("click", () => {
+      document.getElementById("mainContent").style.display = "block";
+      document.getElementById("startBtn").style.display = "none";
+      audio.play();
+    });
+
+    const sweetMessages = [
+      "I love you, Leng! 💖",
+      "Walang iba, ikaw lang. 🥺",
+      "You are my safe space. 😌",
+      "Ang ganda mo sobra. 😍",
+      "You're my sunshine on rainy days. 🌦️",
+      "Miss na kita palagi. 🫂",
+      "Thank you for loving me. 💗",
+      "You are everything I prayed for. 🙏",
+      "Sana ikaw na talaga. 😘",
+      "Wag mong kalimutan… I’m always here. 🤗"
+    ];
+
+    function handleClick(msg) {
+      showMessage(msg);
+      showPopup(msg);
+      createFloatingMessage(msg);
+    }
+
+    function showMessage(msg) {
+      document.getElementById("message").textContent = msg;
+    }
+
+    function showPopup(msg) {
+      const popup = document.getElementById('popupBox');
+      popup.textContent = msg;
+      popup.style.display = 'block';
+      setTimeout(() => { popup.style.display = 'none'; }, 4000);
+    }
+
+    function createFloatingMessage(text) {
+      const msg = document.createElement("div");
+      msg.className = "floating-message";
+      msg.style.left = Math.random() * 80 + "%";
+      msg.style.top = Math.random() * 80 + "%";
+      msg.textContent = text;
+      document.body.appendChild(msg);
+      setTimeout(() => { msg.remove(); }, 6000);
+    }
+
+    // Confetti
+    const canvas = document.querySelector(".confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let confetti = [];
+    for (let i = 0; i < 150; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 4 + 1,
+        d: Math.random() * 40
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ff69b4";
+      confetti.forEach(c => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      updateConfetti();
+    }
+
+    function updateConfetti() {
+      confetti.forEach(c => {
+        c.y += Math.cos(c.d) + 1;
+        c.x += Math.sin(c.d);
+        if (c.y > canvas.height) {
+          c.y = 0;
+          c.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    setInterval(drawConfetti, 30);
+
+    // Sparkle Trail
+    const sparkleCanvas = document.querySelector(".sparkleCanvas");
+    const sparkleCtx = sparkleCanvas.getContext("2d");
+    sparkleCanvas.width = window.innerWidth;
+    sparkleCanvas.height = window.innerHeight;
+
+    let sparkles = [];
+    document.addEventListener("mousemove", (e) => {
+      for (let i = 0; i < 5; i++) {
+        sparkles.push({
+          x: e.clientX,
+          y: e.clientY,
+          alpha: 1,
+          radius: Math.random() * 3 + 1
+        });
+      }
+    });
+
+    function drawSparkles() {
+      sparkleCtx.clearRect(0, 0, sparkleCanvas.width, sparkleCanvas.height);
+      sparkleCtx.fillStyle = "rgba(255,215,0,0.8)";
+      sparkles.forEach((s, i) => {
+        sparkleCtx.beginPath();
+        sparkleCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        sparkleCtx.fill();
+        s.alpha -= 0.02;
+        if (s.alpha <= 0) sparkles.splice(i, 1);
+      });
+    }
+
+    setInterval(drawSparkles, 30);
+  </script>
+
+</body>
+</html>
